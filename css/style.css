@@ -94,3 +94,27 @@ display: flex;
 .red {
   background-color: red;
 }
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.violet {
+  background-color: purple;
+}
+
+.orange {
+  background-color: rgb(233, 141, 37);
+}
+
+.pink {
+  background-color: rgb(180, 46, 151);
+}
