@@ -14,6 +14,63 @@ const GAME_PARAMS = {
   }
 }
 
+function Block() {
+  this.type = Math.floor(Math.random() * (Object.keys(GAME_PARAMS.colors).length) + 1)
+  this.columns = null
+  this.y = null
+  this.x = null
+  this.erasable = false
+}
+
+Block.prototype.setErasable = function () {
+  let isAligned = false
+  if (
+    this.columns?.[this.x - 1]?.[this.y] &&
+    this.columns?.[this.x - 2]?.[this.y] &&
+    this.columns[this.x - 1][this.y].type === this.type &&
+    this.columns[this.x - 2][this.y].type
+  ) {
+    isAligned = true
+  } else if (
+    this.columns?.[this.x + 1]?.[this.y] &&
+    this.columns?.[this.x + 2]?.[this.y] &&
+    this.columns[this.x + 1][this.y].type === this.type &&
+    this.columns[this.x + 2][this.y].type === this.type
+  ) {
+    isAligned = true
+  } else if (
+    this.columns?.[this.x - 1]?.[this.y] &&
+    this.columns?.[this.x + 1]?.[this.y] &&
+    this.columns[this.x - 1][this.y].type === this.type &&
+    this.columns[this.x + 1][this.y].type === this.type
+  ) {
+    isAligned = true
+  }
+  else if (
+    this.columns?.[this.x]?.[this.y - 1] &&
+    this.columns?.[this.x]?.[this.y - 2] &&
+    this.columns[this.x][this.y - 1].type === this.type &&
+    this.columns[this.x][this.y - 2].type === this.type
+  ) {
+    isAligned = true
+  } else if (
+    this.columns?.[this.x]?.[this.y + 1] &&
+    this.columns?.[this.x]?.[this.y + 2] &&
+    this.columns[this.x][this.y + 1].type === this.type &&
+    this.columns[this.x][this.y + 2].type === this.type
+  ) {
+    isAligned = true
+  } else if (
+    this.columns?.[this.x]?.[this.y + 1] &&
+    this.columns?.[this.x]?.[this.y - 1] &&
+    this.columns[this.x][this.y + 1].type === this.type &&
+    this.columns[this.x][this.y - 1].type === this.type
+  ) {
+    isAligned = true
+  }
+  this.erasable = isAligned
+}
+
 
 function Board(tableId) {
   this.element = document.getElementById(tableId)
@@ -30,14 +87,14 @@ Board.prototype.drawBoard = function () {
   ]
 
   cells.forEach((cell, i) => {
-    cell?.classList.add(GAME_PARAMS.colors[this.column.blocks[i]])
+    cell?.classList.add(GAME_PARAMS.colors[this.column.blocks[i].type])
   })
 
 
   this.columns.forEach((col, i) => {
     col.forEach((cell, j) => {
       let block = this.element.querySelector(`.row${j} .col${i}`)
-      block?.classList.add(GAME_PARAMS.colors[this.columns[i][j]])
+      block?.classList.add(GAME_PARAMS.colors[this.columns[i][j].type])
     })
   })
 }
@@ -49,18 +106,17 @@ Board.prototype.clearBoard = function () {
   })
 }
 
-/*Board.prototype.saveBlocks = function () {
-  this.columns.forEach((column, i) => {
-    column.filter(cell, j) {
-      return (
-        cell === column[i][j + 1] && cell === column[i][j + 2]
-        || cell === column[i][j + 1] && cell === column[i][j - 1]
-        || cell === column[i][j - 1] && cell === column[i][j - 2]
-        )
-
-    }
+Board.prototype.saveBlocks = function () {
+  this.columns.forEach(column => {
+    column.forEach(block => {
+      block.setErasable()
+    })
   })
-}*/
+
+  this.columns = this.columns.map(column => {
+    return column.filter(block => {return !block.isErasable})
+  })
+}
 
 function GameBoard(board, player) {
   const self = this
@@ -77,9 +133,9 @@ function Column() {
   this.x = GAME_PARAMS.initialXPosition
   this.y = GAME_PARAMS.numberOfRows
   this.blocks = [
-    Math.floor(Math.random() * (Object.keys(GAME_PARAMS.colors).length) + 1),
-    Math.floor(Math.random() * (Object.keys(GAME_PARAMS.colors).length) + 1),
-    Math.floor(Math.random() * (Object.keys(GAME_PARAMS.colors).length) + 1)
+    new Block(),
+    new Block(),
+    new Block()
   ]
 }
 
@@ -108,30 +164,41 @@ const board = new Board('player1-board')
 const gameBoard = new GameBoard(board, 1)
 
 gameBoard.timerId = setInterval(function () {
-
   if (gameBoard.board.columns[gameBoard.board.column.x].length < gameBoard.board.column.y) {
     gameBoard.board.column.goDown()
   } else {
+    const i = gameBoard.board.columns[gameBoard.board.column.x].length
     gameBoard.board.columns[gameBoard.board.column.x].push(...gameBoard.board.column.blocks)
+    let j = 0
+    for (const block of gameBoard.board.column.blocks) {
+      block.columns = gameBoard.board.columns
+      block.y = i + j
+      block.x = gameBoard.board.column.x
+      j++
+    }
+
     if (gameBoard.board.columns[gameBoard.board.column.x].length >= GAME_PARAMS.numberOfRows) {
       clearInterval(gameBoard.timerId)
       window.alert('You lose')
     } else {
-      //gameBoard.board.saveBlocks()
+      gameBoard.board.saveBlocks()
+      console.log(gameBoard.board.columns)
       gameBoard.board.column = new Column()
     }
   }
-
-
   gameBoard.board.drawBoard()
 }, gameBoard.speed)
 
-
 window.addEventListener('keydown', function (e) {
-  let keyPressed = e.code
+  const keyPressed = e.code
   if (keyPressed === 'ArrowLeft') {
     gameBoard.board.column.goLeft()
   } else if (keyPressed === 'ArrowRight') {
     gameBoard.board.column.goRight()
   }
 })
+
+const btnStart = document.getElementById('btn-start')
+btnStart.onclick = function () {
+
+}

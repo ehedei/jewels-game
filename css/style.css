@@ -118,3 +118,7 @@ display: flex;
 .pink {
   background-color: rgb(180, 46, 151);
 }
+
+#btn-start {
+  margin: 20px;
+}
