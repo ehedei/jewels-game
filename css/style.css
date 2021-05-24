@@ -1,0 +1,92 @@
+body {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+main {
+  min-width: 800px;
+  height: 600px;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+
+}
+
+main > section {
+  background-color: coral;
+}
+
+.game-zone {
+width: 70%;
+display: flex;
+}
+
+.controllers-wrapper {
+  width: 30%;
+  background-color: darkcyan;
+}
+
+#player-2-zone{
+  display: none;
+}
+
+
+
+.board-wrapper {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  background-color: darksalmon;
+}
+
+
+.game-info-wrapper {
+  width: 40%;
+  height: 100%;
+  background-color: chocolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.game-info-wrapper > .next-piece {
+  width: 100px;
+}
+
+.game-info-wrapper > div {
+  width: 150px;
+  height: 100px;
+  background-color: darkorange;
+
+}
+
+.controllers-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.controllers {
+  display: flex;
+  height: 20%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
