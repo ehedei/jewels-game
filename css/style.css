@@ -90,3 +90,7 @@ display: flex;
   align-items: center;
   justify-content: space-around;
 }
+
+.red {
+  background-color: red;
+}
