@@ -6,6 +6,8 @@ body {
   align-items: center;
   justify-content: center;
   font-family: 'Press Start 2P', cursive;
+  -webkit-text-stroke: 0.5px white;
+  
 }
 
 main {
@@ -15,11 +17,12 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
+  
 
 }
 
 main > section {
-  background-color: coral;
+  background-color: rgb(71, 54, 37);
   box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.39);
 }
 
@@ -31,6 +34,7 @@ display: flex;
 .controllers-wrapper {
   width: 30%;
   background-color: darkcyan;
+  background: url(../assets/img/PATRON.png);
 }
 
 
@@ -72,6 +76,7 @@ table {
   justify-content: space-around;
   padding: 20px;
   box-sizing: border-box;
+  background: url(../assets/img/PATRON.png);
 }
 
 .game-info-wrapper > .next-piece {
@@ -81,7 +86,7 @@ table {
 .game-info-wrapper > div {
   width: 150px;
   height: 100px;
-  background-color: darkorange;
+  background-color: rgb(37, 23, 7);
   display: flex;
   flex-direction: column;
   align-items: center;
