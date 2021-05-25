@@ -42,11 +42,16 @@ display: flex;
 
 }
 
+table {
+  border-spacing: 0;
+}
+
 .cell {
   width: 20px;
   height: 20px;
   background-color: transparent;
   transition: .08s ease;
+  background-size: cover;
 }
 
 #player1-board {
@@ -92,31 +97,35 @@ display: flex;
 }
 
 .red {
-  background-color: red;
+  background-image: url('./../assets/img/red.png');
 }
 
 .green {
-  background-color: green;
+  background-image: url('./../assets/img/green.png');
 }
 
 .blue {
-  background-color: blue;
+  background-image: url('./../assets/img/blue.png');
 }
 
 .yellow {
-  background-color: yellow;
+  background-image: url('./../assets/img/yellow.png');
 }
 
-.violet {
-  background-color: purple;
+.silver {
+  background-image: url('./../assets/img/silver.png');
 }
 
 .orange {
-  background-color: rgb(233, 141, 37);
+  background-image: url('./../assets/img/orange.png');
 }
 
 .pink {
-  background-color: rgb(180, 46, 151);
+  background-image: url('./../assets/img/pink.png');
+}
+
+.black {
+  background-image: url('./../assets/img/black.png');
 }
 
 #btn-start {

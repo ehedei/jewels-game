@@ -9,9 +9,10 @@ const GAME_PARAMS = {
     2: 'green',
     3: 'blue',
     4: 'yellow',
-    5: 'violet',
+    5: 'silver',
     6: 'orange',
-    7: 'pink'
+    7: 'pink',
+    8: 'black'
   }
 }
 
@@ -342,7 +343,6 @@ window.addEventListener('keydown', function (e) {
     gameBoard.board.column.changeOrder()
   }
 })
-
 
 const btnStart = document.getElementById('btn-start')
 btnStart.onclick = function () {
