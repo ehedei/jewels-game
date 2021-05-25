@@ -3,6 +3,7 @@ const GAME_PARAMS = {
   initialXPosition: 4,
   numberOfColumns: 9,
   numberOfRows: 20,
+  acceleration: 5,
   colors: {
     1: 'red',
     2: 'green',
@@ -33,6 +34,12 @@ function Column(board) {
   ]
 }
 
+Column.prototype.changeOrder = function () {
+  const block = this.blocks.pop()
+  this.blocks.unshift(block)
+  this.board.drawBoard()
+}
+
 Column.prototype.goDown = function () {
   this.y--
 }
@@ -47,10 +54,6 @@ Column.prototype.goRight = function () {
   if (this.x < GAME_PARAMS.numberOfColumns - 1 && this.board.columns[this.x + 1].length < this.y) {
     this.x++
   }
-}
-
-Column.prototype.changeOrder = function () {
-  console.log('Switch-order')
 }
 
 function Board(tableId, gameBoard) {
@@ -116,7 +119,7 @@ function GameBoard(tableId, player) {
   this.board = new Board(tableId, this)
 }
 
-GameBoard.prototype.run = function () {
+GameBoard.prototype.run = function (speed = this.speed) {
   const self = this
   self.timerId = setInterval(function () {
     if (self.board.columns[self.board.column.x].length < self.board.column.y) {
@@ -139,21 +142,21 @@ GameBoard.prototype.run = function () {
         self.board.column = new Column(self.board)
         clearInterval(self.timerId)
         self.saveBlocks()
-
-        /*self.prepareDeletions()
-        self.board.deleteBlocks()
-        self.board.drawBoard() */
-        /* if (amountDeletedBlocks > 0) {
-          clearInterval(self.timerId)
-          self.saveBlocks()
-        } */
-        // self.board.saveBlocks()
-        // console.log(self.board.columns)
       }
     }
     self.board.drawBoard()
-  }, self.speed, self)
+  }, speed, self)
 }
+
+GameBoard.prototype.increaseSpeed = function () {
+  /* clearInterval(this.timerId)
+  this.run(this.speed - GAME_PARAMS.acceleration) */
+}
+
+GameBoard.prototype.restoreSpeed = function () {
+  /* clearInterval(this.timerId) */
+}
+
 
 GameBoard.prototype.pause = function () {
   clearInterval(this.timerId)
@@ -278,7 +281,6 @@ GameBoard.prototype.prepareDeletions = function () {
 
 */
 
-
 const gameBoard = new GameBoard('player1-board', 1)
 let isStarted = false
 
@@ -288,8 +290,22 @@ window.addEventListener('keydown', function (e) {
     gameBoard.board.column.goLeft()
   } else if (keyPressed === 'ArrowRight') {
     gameBoard.board.column.goRight()
+  } else if (keyPressed === 'ArrowDown') {
+    gameBoard.increaseSpeed()
+  } else if (keyPressed === 'ArrowUp' || keyPressed === 'Space') {
+    console.log('Me has movido')
+    gameBoard.board.column.changeOrder()
   }
 })
+
+/*
+window.addEventListener('keyup', function (e) {
+  const key = e.code
+  if (key === 'ArrowDown') {
+    gameBoard.restoreSpeed()
+  }
+})
+*/
 
 const btnStart = document.getElementById('btn-start')
 btnStart.onclick = function () {
