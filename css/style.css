@@ -31,10 +31,6 @@ display: flex;
   background-color: darkcyan;
 }
 
-#player-2-zone{
-  display: none;
-}
-
 
 
 .board-wrapper {
@@ -49,9 +45,13 @@ display: flex;
 .cell {
   width: 20px;
   height: 20px;
-  background-color: darksalmon;
+  background-color: transparent;
+  transition: .08s ease;
 }
 
+#player1-board {
+  background-color: darksalmon;
+}
 
 .game-info-wrapper {
   width: 40%;

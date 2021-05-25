@@ -1,5 +1,5 @@
 const GAME_PARAMS = {
-  initialSpeed: 200,
+  initialSpeed: 250,
   initialXPosition: 4,
   numberOfColumns: 9,
   numberOfRows: 20,
@@ -157,19 +157,6 @@ GameBoard.prototype.destroy = function () {
   this.board.clearBoard()
 }
 
-GameBoard.prototype.increaseSpeed = function () {
-  console.log('incrementas velocidad')
-  clearInterval(this.timerId)
-  this.run(this.speed - GAME_PARAMS.acceleration * 2)
-}
-
-GameBoard.prototype.restoreSpeed = function () {
-  console.log('recuperas velocidad')
-  clearInterval(this.timerId)
-  this.run(this.speed - GAME_PARAMS.acceleration * 2)
-}
-
-
 GameBoard.prototype.pause = function () {
   clearInterval(this.timerId)
 }
@@ -210,7 +197,7 @@ GameBoard.prototype.saveBlocks = function () {
     } else {
       self.run()
     }
-  }, GAME_PARAMS.initialSpeed)
+  }, GAME_PARAMS.initialSpeed * 1.7)
 }
 
 GameBoard.prototype.prepareDeletions = function () {
