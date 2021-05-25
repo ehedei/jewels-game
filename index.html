@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Columns</title>
+  <title>Jewels</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <script src="./src/index.js" defer></script>
 </head>
+
 <body>
   <main>
     <section class="game-zone" id="player1-zone">
@@ -25,9 +29,18 @@
             </tr>
           </table>
         </div>
-        <div class="level"></div>
-        <div class="points"></div>
-        <div class="blocks"></div>
+        <div class="level">
+          <h4>Level</h4>
+          <span></span>
+        </div>
+        <div class="points">
+          <h4>Points</h4>
+          <span></span>
+        </div>
+        <div class="blocks">
+          <h4>Jewels</h4>
+          <span></span>
+        </div>
       </div>
       <div class="board-wrapper">
         <table id="player1-board">
@@ -276,7 +289,7 @@
     </section>
     <section class="controllers-wrapper">
       <header>
-          <h1>Columns</h1>
+        <h1>Jewels</h1>
       </header>
       <div class="controllers">
         <button id="btn-start" type="button">Start/Pause</button>
@@ -297,4 +310,5 @@
 
   </main>
 </body>
+
 </html>

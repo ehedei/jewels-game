@@ -81,13 +81,13 @@ function Board(playerName, gameBoard) {
 }
 
 Board.prototype.drawData = function () {
-  const levelWrap = this.wrapper.querySelector('.level')
+  const levelWrap = this.wrapper.querySelector('.level span')
   levelWrap.innerText = this.gameBoard.level
 
-  const pointsWrap = this.wrapper.querySelector('.points')
+  const pointsWrap = this.wrapper.querySelector('.points span')
   pointsWrap.innerText = this.gameBoard.points
 
-  const blocksWrap = this.wrapper.querySelector('.blocks')
+  const blocksWrap = this.wrapper.querySelector('.blocks span')
   blocksWrap.innerText = this.gameBoard.savedBlocks
 }
 
