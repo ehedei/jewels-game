@@ -1,9 +1,9 @@
 const GAME_PARAMS = {
-  initialSpeed: 300,
+  initialSpeed: 200,
   initialXPosition: 4,
   numberOfColumns: 9,
   numberOfRows: 20,
-  acceleration: 5,
+  acceleration: 20,
   colors: {
     1: 'red',
     2: 'green',
@@ -60,6 +60,7 @@ function Board(tableId, gameBoard) {
   this.element = document.getElementById(tableId)
   this.columns = [[], [], [], [], [], [], [], [], []]
   this.column = new Column(this)
+  this.nextColumn = new Column(this)
   this.gameBoard = gameBoard
 }
 
@@ -90,23 +91,22 @@ Board.prototype.clearBoard = function () {
   })
 }
 
-Board.prototype.prepareDelete = function () {
-  let amount = 0
-  this.columns.forEach(column => {
-    column.forEach(block => {
-      if (block.setErasable()) {
-        amount++
-      }
-    })
-  })
-  console.log('prepareDelete', amount, this.columns.filter(block => { return block.erasable }))
-  return amount
-}
-
 Board.prototype.deleteBlocks = function () {
   this.columns = this.columns.map(column => {
     return column.filter(block => { return !block.erasable })
   })
+}
+
+Board.prototype.countErasableBlocks = function () {
+  let amount = 0
+  this.columns.forEach(function (column) {
+    column.forEach(function (cell) {
+      if (cell.erasable) {
+        amount++
+      }
+    })
+  })
+  return amount
 }
 
 function GameBoard(tableId, player) {
@@ -119,8 +119,10 @@ function GameBoard(tableId, player) {
   this.board = new Board(tableId, this)
 }
 
-GameBoard.prototype.run = function (speed = this.speed) {
+GameBoard.prototype.run = function () {
   const self = this
+  const speed = GAME_PARAMS.initialSpeed - (this.level - 1) * GAME_PARAMS.acceleration
+
   self.timerId = setInterval(function () {
     if (self.board.columns[self.board.column.x].length < self.board.column.y) {
       self.board.column.goDown()
@@ -139,12 +141,14 @@ GameBoard.prototype.run = function (speed = this.speed) {
         clearInterval(self.timerId)
         window.alert('You lose')
       } else {
+        self.board.column = self.board.nextColumn
         self.board.column = new Column(self.board)
         clearInterval(self.timerId)
         self.saveBlocks()
       }
     }
     self.board.drawBoard()
+    self.increaseLevel()
   }, speed, self)
 }
 
@@ -162,6 +166,27 @@ GameBoard.prototype.pause = function () {
   clearInterval(this.timerId)
 }
 
+GameBoard.prototype.nextLevel = function () {
+  return this.level * 100 + (this.level - 1) * 125
+}
+
+GameBoard.prototype.increaseLevel = function () {
+  if (this.nextLevel() <= this.points) {
+    this.level++
+    console.log('New level', this.level)
+    clearInterval(this.timerId)
+    this.run()
+  }
+}
+
+
+GameBoard.prototype.setPoints = function () {
+  let blocksAmount = this.board.countErasableBlocks()
+  this.savedBlocks += blocksAmount
+  this.points += blocksAmount * (this.level + 1)
+  console.log('savedBlocks', this.savedBlocks, blocksAmount)
+  console.log('points', this.points)
+}
 
 GameBoard.prototype.saveBlocks = function () {
   const self = this
@@ -169,6 +194,7 @@ GameBoard.prototype.saveBlocks = function () {
 
   setTimeout(() => {
     if (needToDelete) {
+      self.setPoints()
       self.board.deleteBlocks()
       self.board.drawBoard()
       self.saveBlocks()
@@ -293,7 +319,6 @@ window.addEventListener('keydown', function (e) {
   } else if (keyPressed === 'ArrowDown') {
     gameBoard.increaseSpeed()
   } else if (keyPressed === 'ArrowUp' || keyPressed === 'Space') {
-    console.log('Me has movido')
     gameBoard.board.column.changeOrder()
   }
 })
