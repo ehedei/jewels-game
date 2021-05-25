@@ -13,6 +13,15 @@ const GAME_PARAMS = {
     6: 'orange',
     7: 'pink',
     8: 'black'
+  },
+  audios: {
+    fall: new Audio('./../assets/audio/fall.wav'),
+    gameover: new Audio('./../assets/audio/gameover.wav'),
+    line: new Audio('./../assets/audio/line.wav'),
+    success: new Audio('./../assets/audio/success.wav'),
+    clear: new Audio('./../assets/audio/clear.wav'),
+    selection: new Audio('./../assets/audio/selection.wav'),
+    main: new Audio('./../assets/audio/clear-skies.mp3')
   }
 }
 
@@ -161,10 +170,12 @@ GameBoard.prototype.run = function (newSpeed = this.speed) {
         block.x = self.board.column.x
         j++
       }
+        GAME_PARAMS.audios.fall.play()
 
       if (self.board.columns[self.board.column.x].length >= GAME_PARAMS.numberOfRows) {
         clearInterval(self.timerId)
-        window.alert('You lose')
+        GAME_PARAMS.audios.main.pause()
+        GAME_PARAMS.audios.gameover.play()
       } else {
         self.board.column = self.board.nextColumn
         self.board.nextColumn = new Column(self.board)
@@ -198,6 +209,7 @@ GameBoard.prototype.increaseLevel = function () {
     clearInterval(this.timerId)
     this.speed = this.speed - (this.level - 1) * GAME_PARAMS.acceleration
     this.run()
+    GAME_PARAMS.audios.success.play()
   }
 }
 
@@ -217,6 +229,7 @@ GameBoard.prototype.saveBlocks = function () {
       self.setPoints()
       self.board.deleteBlocks()
       self.board.drawBoard()
+      GAME_PARAMS.audios.line.play()
       self.saveBlocks()
     } else {
       self.run()
@@ -348,8 +361,13 @@ const btnStart = document.getElementById('btn-start')
 btnStart.onclick = function () {
   if (isStarted) {
     gameBoard.pause()
+    GAME_PARAMS.audios.main.pause()
+    btnStart.innerHTML = 'Start'
   } else {
     gameBoard.run()
+    GAME_PARAMS.audios.main.loop = true
+    GAME_PARAMS.audios.main.play()
+    btnStart.innerHTML = 'Pause'
   }
   isStarted = !isStarted
 }
@@ -360,5 +378,6 @@ btnReset.addEventListener('click', function () {
   gameBoard = new GameBoard('player1', 1)
   if (isStarted) {
     gameBoard.run()
+    GAME_PARAMS.audios.main.play()
   }
 })

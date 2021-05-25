@@ -57,7 +57,9 @@ table {
 }
 
 #player1-board {
-  background-color: darksalmon;
+  background: url('./../assets/img/rockbg.png');
+  border: 2px solid brown;
+  box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.39);
 }
 
 .game-info-wrapper {
