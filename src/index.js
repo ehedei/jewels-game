@@ -1,5 +1,5 @@
 const GAME_PARAMS = {
-  initialSpeed: 150,
+  initialSpeed: 300,
   initialXPosition: 4,
   numberOfColumns: 9,
   numberOfRows: 20,
@@ -137,9 +137,12 @@ GameBoard.prototype.run = function () {
         window.alert('You lose')
       } else {
         self.board.column = new Column(self.board)
-        self.prepareDeletions()
+        clearInterval(self.timerId)
+        self.saveBlocks()
+
+        /*self.prepareDeletions()
         self.board.deleteBlocks()
-        self.board.drawBoard()
+        self.board.drawBoard() */
         /* if (amountDeletedBlocks > 0) {
           clearInterval(self.timerId)
           self.saveBlocks()
@@ -156,40 +159,50 @@ GameBoard.prototype.pause = function () {
   clearInterval(this.timerId)
 }
 
+
 GameBoard.prototype.saveBlocks = function () {
   const self = this
+  let needToDelete = self.prepareDeletions()
+
   setTimeout(() => {
-    self.board.deleteBlocks()
-    self.board.drawBoard()
-    self.run()
+    if (needToDelete) {
+      self.board.deleteBlocks()
+      self.board.drawBoard()
+      self.saveBlocks()
+    } else {
+      self.run()
+    }
   }, GAME_PARAMS.initialSpeed)
 }
 
 GameBoard.prototype.prepareDeletions = function () {
   const columns = this.board.columns
+  let needToDelete = false
 
   // Vertical
   for (let x = 0; x < columns.length; x++) {
     for (let y = 0; y < columns[x].length - 2; y++) {
       if (!columns[x][y] || !columns[x][y + 1] || !columns[x][y + 2]) {
         break
-      } else if (columns[x][y].type === columns[x][y + 1].type && columns[x][y + 2].type === columns[x][y].type) {
+      } else if (columns[x][y].type === columns[x][y + 1].type && columns[x][y].type === columns[x][y + 2].type) {
         columns[x][y].erasable = true
         columns[x][y + 1].erasable = true
         columns[x][y + 2].erasable = true
+        needToDelete = true
       }
     }
   }
 
   // Horizontal
-  for (let x = 0; x < columns.length - 2; x++) {
+  for (let x = 1; x < columns.length - 1; x++) {
     for (let y = 0; y < columns[x].length; y++) {
-      if (!columns[x][y] || !columns[x + 1][y] || !columns[x + 2][y]) {
+      if (!columns[x][y] || !columns[x + 1][y] || !columns[x - 1][y]) {
         break
-      } else if (columns[x][y].type === columns[x + 1][y].type && columns[x + 2][y].type === columns[x][y].type) {
+      } else if (columns[x][y].type === columns[x + 1][y].type && columns[x - 1][y].type === columns[x][y].type) {
         columns[x][y].erasable = true
         columns[x + 1][y].erasable = true
-        columns[x + 2][y].erasable = true
+        columns[x - 1][y].erasable = true
+        needToDelete = true
       }
     }
   }
@@ -203,23 +216,68 @@ GameBoard.prototype.prepareDeletions = function () {
         columns[x][y].erasable = true
         columns[x + 1][y + 1].erasable = true
         columns[x + 2][y + 2].erasable = true
+        needToDelete = true
       }
     }
   }
 
   // Diagonal Inversa
-  for (let x = 0; x < columns.length - 2; x++) {
+  for (let x = 2; x < columns.length; x++) {
     for (let y = 0; y < columns[x].length; y++) {
-      if (!columns[x][y] || !columns[x + 1][y - 1] || !columns[x + 2][y - 2]) {
+      if (!columns[x][y] || !columns[x - 1][y + 1] || !columns[x - 2][y + 2]) {
         break
-      } else if (columns[x][y].type === columns[x + 1][y - 1].type && columns[x + 2][y - 2].type === columns[x][y].type) {
+      } else if (columns[x][y].type === columns[x - 1][y + 1].type && columns[x - 2][y + 2].type === columns[x][y].type) {
         columns[x][y].erasable = true
-        columns[x + 1][y - 1].erasable = true
-        columns[x + 2][y - 2].erasable = true
+        columns[x - 1][y + 1].erasable = true
+        columns[x - 2][y + 2].erasable = true
+        needToDelete = true
       }
     }
   }
+  return needToDelete
 }
+
+/*
+GameBoard.prototype.calculateDeletions = function (baseX, baseY) {
+  const columns = this.board.columns
+  let needToDelete = false
+
+  console.log(baseX)
+  console.log(baseY)
+
+  for (let x = 0; x < columns.length; x++) {
+    for (let y = 0; y < columns[x].length; y++) {
+      if (!columns[x][y] || !columns[x + baseX.a][y + baseY.a] || !columns[x + baseX.a][y + baseY.b]) {
+        break
+      } else if (columns[x][y].type === columns[x][y + a].type && columns[x][y + b].type === columns[x][y].type) {
+        columns[x][y].erasable = true
+        columns[x][y + a].erasable = true
+        columns[x][y + b].erasable = true
+        needToDelete = true
+      }
+    }
+  }
+  return needToDelete
+}
+
+GameBoard.prototype.prepareDeletions = function () {
+  // Vertical
+  const verticalDelete = this.calculateDeletions({ a: 1, b: 2 }, { a: 0, b: 0 })
+
+  // Horizontal
+  const horizontalDelete = this.calculateDeletions({ a: 1, b: -1 }, { a: 0, b: 0 })
+
+  // Diagonal
+  const diagonalDelete = this.calculateDeletions({ a: 1, b: 2 }, { a: 1, b: 2 })
+
+  // Diagonal Inversa
+  const inverseDiagonalDelete = this.calculateDeletions({ a: -1, b: -2 }, { a: 1, b: 2 })
+
+  return (verticalDelete || horizontalDelete || diagonalDelete || inverseDiagonalDelete)
+}
+
+*/
+
 
 const gameBoard = new GameBoard('player1-board', 1)
 let isStarted = false
