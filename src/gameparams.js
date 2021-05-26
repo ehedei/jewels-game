@@ -13,8 +13,7 @@ export const GAME_PARAMS = {
     4: 'yellow',
     5: 'silver',
     6: 'orange',
-    7: 'pink',
-    8: 'black'
+    7: 'pink'
   },
   audios: {
     fall: new Audio('./../assets/audio/fall.wav'),

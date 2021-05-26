@@ -2,7 +2,7 @@ import { Column } from './column.js'
 import { Board } from './board.js'
 import { GAME_PARAMS } from './gameparams.js'
 
-export function GameBoard(playerName, player) {
+export function GameBoard (playerName, player) {
   this.speed = GAME_PARAMS.initialSpeed
   this.player = player
   this.points = 0
@@ -38,13 +38,16 @@ GameBoard.prototype.run = function (newSpeed = this.speed) {
 
       if (self.board.columns[self.board.column.x].length >= GAME_PARAMS.numberOfRows) {
         clearInterval(self.timerId)
+        self.timerId = false
         GAME_PARAMS.audios.main.pause()
         GAME_PARAMS.audios.gameover.play()
-        // GAME OVER ******************************************************************************
+        document.getElementById('final-score').innerText = self.points
+        document.getElementById('gameover-screen').style.display = 'flex'
       } else {
         self.board.column = self.board.nextColumn
         self.board.nextColumn = new Column(self.board)
         clearInterval(self.timerId)
+        self.timerId = false
         self.saveBlocks(special)
       }
     }
@@ -71,11 +74,13 @@ GameBoard.prototype.prepareSpecialDeletions = function (type) {
 
 GameBoard.prototype.destroy = function () {
   clearInterval(this.timerId)
+  this.timerId = false
   this.board.clearBoard()
 }
 
 GameBoard.prototype.pause = function () {
   clearInterval(this.timerId)
+  this.timerId = false
 }
 
 GameBoard.prototype.nextLevel = function () {
@@ -86,6 +91,7 @@ GameBoard.prototype.increaseLevel = function () {
   if (this.nextLevel() <= this.points) {
     this.level++
     clearInterval(this.timerId)
+    this.timerId = false
     this.speed = this.speed - (this.level - 1) * GAME_PARAMS.acceleration
     this.run()
     GAME_PARAMS.audios.success.play()
@@ -93,7 +99,7 @@ GameBoard.prototype.increaseLevel = function () {
 }
 
 GameBoard.prototype.setPoints = function () {
-  let blocksAmount = this.board.countErasableBlocks()
+  const blocksAmount = this.board.countErasableBlocks()
   this.savedBlocks += blocksAmount
   this.points += blocksAmount * (this.level + 1)
 }
@@ -102,6 +108,7 @@ GameBoard.prototype.saveBlocks = function (special = null) {
   const self = this
   const needToDelete = special ? self.prepareSpecialDeletions(special) : self.prepareDeletions()
   clearInterval(this.timerId)
+  this.timerId = false
   self.board.drawBoard()
 
   setTimeout(() => {

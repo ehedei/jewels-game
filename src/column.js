@@ -20,19 +20,19 @@ Column.prototype.changeOrder = function () {
 }
 
 Column.prototype.goDown = function () {
-  if (this.board.columns[this.x].length < this.y) {
+  if (this.board.columns[this.x].length < this.y && this.board.gameBoard.timerId) {
     this.y--
   }
 }
 
 Column.prototype.goLeft = function () {
-  if (this.x > 0 && this.board.columns[this.x - 1].length < this.y) {
+  if (this.x > 0 && this.board.columns[this.x - 1].length < this.y && this.board.gameBoard.timerId) {
     this.x--
   }
 }
 
 Column.prototype.goRight = function () {
-  if (this.x < GAME_PARAMS.numberOfColumns - 1 && this.board.columns[this.x + 1].length < this.y) {
+  if (this.x < GAME_PARAMS.numberOfColumns - 1 && this.board.columns[this.x + 1].length < this.y && this.board.gameBoard.timerId) {
     this.x++
   }
 }
