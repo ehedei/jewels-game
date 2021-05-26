@@ -10,6 +10,7 @@ export function Column(board) {
     new Block(board),
     new Block(board)
   ]
+  this.setSpecial()
 }
 
 Column.prototype.changeOrder = function () {
@@ -43,5 +44,14 @@ Column.prototype.drawNextPiece = function () {
   for (let i = 0; i < cells.length; i++) {
     cells[i].classList.remove(...Object.values(GAME_PARAMS.colors))
     cells[i].classList.add(GAME_PARAMS.colors[blocks[i].type])
+  }
+}
+
+Column.prototype.setSpecial = function () {
+  const lottery = Math.floor(Math.random() * (GAME_PARAMS.frequencyOfSpecial - 1)) + 1
+  if (lottery === 1) {
+    this.blocks.forEach(block => {
+      block.setSpecial()
+    })
   }
 }

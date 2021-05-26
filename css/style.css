@@ -200,10 +200,14 @@ table {
   }
 }
 
-.special {
+/*.special {
   animation-name: special-piece;
-  animation-duration: .5s;
+  animation-duration: 1s;
   animation-iteration-count: infinite;
+}*/
+
+.special {
+  background-image: url('./../assets/img/special.gif');
 }
 
 #btn-start {

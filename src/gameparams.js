@@ -1,6 +1,7 @@
 export const GAME_PARAMS = {
   initialSpeed: 250,
   initialXPosition: 4,
+  frequencyOfSpecial: 1,
   numberOfColumns: 9,
   numberOfRows: 20,
   acceleration: 20,
