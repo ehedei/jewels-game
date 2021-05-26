@@ -14,9 +14,11 @@ export function Column (board) {
 }
 
 Column.prototype.changeOrder = function () {
-  const block = this.blocks.pop()
-  this.blocks.unshift(block)
-  this.board.drawBoard()
+  if (this.board.gameBoard.timerId) {
+    const block = this.blocks.pop()
+    this.blocks.unshift(block)
+    this.board.drawBoard()
+  }
 }
 
 Column.prototype.goDown = function () {

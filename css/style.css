@@ -45,7 +45,7 @@ display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  position: relative;
 }
 
 table {
@@ -260,8 +260,20 @@ button {
 
 .gameover-cnt {
   height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
 }
 
+.gameover-cnt h2 {
+  font-size: 50px;
+}
+
+.gameover-cnt button {
+  margin-top: 40px;
+  padding: 2rem 3.8rem;
+}
 
 .score-cnt h4 {
   margin-bottom: 10px;
@@ -271,4 +283,36 @@ button {
   color:darkgoldenrod;
   text-align: center;
   font-size: 20px;
+}
+
+#level-up {
+  position: absolute;
+  opacity: 0;
+}
+
+
+@keyframes level-up {
+  0% {
+    opacity: 0;
+    top: 50%;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    top: 15%;
+  }
+}
+
+.level-up {
+  animation: level-up;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
 }

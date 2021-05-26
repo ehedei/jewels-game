@@ -84,7 +84,7 @@ GameBoard.prototype.pause = function () {
 }
 
 GameBoard.prototype.nextLevel = function () {
-  return this.level * 100 + (this.level - 1) * 125
+  return this.level * GAME_PARAMS.nextLevel + (this.level - 1) * (GAME_PARAMS.nextLevel + GAME_PARAMS.nextLevel / 4)
 }
 
 GameBoard.prototype.increaseLevel = function () {
@@ -94,6 +94,13 @@ GameBoard.prototype.increaseLevel = function () {
     this.timerId = false
     this.speed = this.speed - (this.level - 1) * GAME_PARAMS.acceleration
     this.run()
+    const label = document.getElementById('level-up')
+    label.classList.add('level-up')
+
+    setTimeout(function () {
+      label.classList.remove('level-up')
+    }, 1500)
+
     GAME_PARAMS.audios.success.play()
   }
 }
