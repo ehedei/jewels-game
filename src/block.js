@@ -1,4 +1,4 @@
-import {GAME_PARAMS} from './gameparams.js'
+import { GAME_PARAMS } from './gameparams.js'
 
 export function Block(board) {
   this.type = Math.floor(Math.random() * (Object.keys(GAME_PARAMS.colors).length - 1)) + 1
@@ -6,7 +6,6 @@ export function Block(board) {
   this.y = null
   this.x = null
   this.erasable = false
-
 }
 
 Block.prototype.setSpecial = function () {

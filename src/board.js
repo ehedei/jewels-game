@@ -1,7 +1,7 @@
-import {Column} from './column.js'
-import {GAME_PARAMS} from './gameparams.js'
+import { Column } from './column.js'
+import { GAME_PARAMS } from './gameparams.js'
 
-export function Board(playerName, gameBoard) {
+export function Board (playerName, gameBoard) {
   this.element = document.getElementById(playerName + '-board')
   this.wrapper = document.getElementById(playerName + '-zone')
   this.columns = [[], [], [], [], [], [], [], [], []]
@@ -35,7 +35,7 @@ Board.prototype.drawBoard = function () {
 
   this.columns.forEach((col, i) => {
     col.forEach((cell, j) => {
-      let block = this.element.querySelector(`.row${j} .col${i}`)
+      const block = this.element.querySelector(`.row${j} .col${i}`)
       block?.classList.add(GAME_PARAMS.colors[this.columns[i][j].type])
     })
   })
@@ -45,7 +45,7 @@ Board.prototype.drawBoard = function () {
 Board.prototype.clearBoard = function () {
   const cells = this.element.querySelectorAll('.cell')
   cells.forEach(function (cell) {
-    cell.classList.remove(...Object.values(GAME_PARAMS.colors))
+    cell.classList.remove('deleted', ...Object.values(GAME_PARAMS.colors))
   })
 }
 
@@ -72,7 +72,7 @@ Board.prototype.setSpecialToErasable = function () {
     col.forEach((block, j) => {
       if (block.erasable) {
         const cell = this.element.querySelector(`.row${j} .col${i}`)
-        cell?.classList.add('special')
+        cell?.classList.add('deleted')
       }
     })
   })

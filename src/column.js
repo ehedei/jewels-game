@@ -1,7 +1,7 @@
-import {Block} from './block.js'
-import {GAME_PARAMS} from './gameparams.js'
+import { Block } from './block.js'
+import { GAME_PARAMS } from './gameparams.js'
 
-export function Column(board) {
+export function Column (board) {
   this.x = GAME_PARAMS.initialXPosition
   this.y = GAME_PARAMS.numberOfRows
   this.board = board

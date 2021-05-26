@@ -162,7 +162,7 @@ table {
   background-image: url('./../assets/img/black.png');
 }
 
-@keyframes special-piece {
+@keyframes delete-piece {
   0% {
     background-image: url('./../assets/img/silver.png');
   }
@@ -200,11 +200,11 @@ table {
   }
 }
 
-/*.special {
-  animation-name: special-piece;
+.deleted {
+  animation-name: delete-piece;
   animation-duration: 1s;
   animation-iteration-count: infinite;
-}*/
+}
 
 .special {
   background-image: url('./../assets/img/special.gif');

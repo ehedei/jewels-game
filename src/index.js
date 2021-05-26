@@ -1,8 +1,5 @@
-import {Block} from './block.js'
-import {Column} from './column.js'
-import {Board} from './board.js'
-import {GAME_PARAMS} from './gameparams.js'
-import {GameBoard} from './gameboard.js'
+import { GAME_PARAMS } from './gameparams.js'
+import { GameBoard } from './gameboard.js'
 
 let gameBoard = new GameBoard('player1', 1)
 let isStarted = false

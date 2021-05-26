@@ -1,6 +1,6 @@
-import {Column} from './column.js'
-import {Board} from './board.js'
-import {GAME_PARAMS} from './gameparams.js'
+import { Column } from './column.js'
+import { Board } from './board.js'
+import { GAME_PARAMS } from './gameparams.js'
 
 export function GameBoard(playerName, player) {
   this.speed = GAME_PARAMS.initialSpeed
@@ -15,9 +15,12 @@ export function GameBoard(playerName, player) {
 GameBoard.prototype.run = function (newSpeed = this.speed) {
   const self = this
   self.timerId = setInterval(function () {
+    let special = null
+
     if (self.board.columns[self.board.column.x].length < self.board.column.y) {
       self.board.column.goDown()
     } else {
+      GAME_PARAMS.audios.fall.play()
       const i = self.board.columns[self.board.column.x].length
       self.board.columns[self.board.column.x].push(...self.board.column.blocks)
       let j = 0
@@ -27,7 +30,11 @@ GameBoard.prototype.run = function (newSpeed = this.speed) {
         block.x = self.board.column.x
         j++
       }
-      GAME_PARAMS.audios.fall.play()
+
+      // If Column is a special piece (and is not the only piece in the column), we get the type of the block below
+      if (self.board.column.blocks[0].type === 0 && i > 0) {
+        special = self.board.columns[self.board.column.x][i - 1].type
+      }
 
       if (self.board.columns[self.board.column.x].length >= GAME_PARAMS.numberOfRows) {
         clearInterval(self.timerId)
@@ -38,7 +45,7 @@ GameBoard.prototype.run = function (newSpeed = this.speed) {
         self.board.column = self.board.nextColumn
         self.board.nextColumn = new Column(self.board)
         clearInterval(self.timerId)
-        self.saveBlocks()
+        self.saveBlocks(special)
       }
     }
     self.board.drawBoard()
@@ -46,6 +53,20 @@ GameBoard.prototype.run = function (newSpeed = this.speed) {
     self.board.nextColumn.drawNextPiece()
     self.increaseLevel()
   }, newSpeed, self)
+}
+
+GameBoard.prototype.prepareSpecialDeletions = function (type) {
+  const columns = this.board.columns
+  let existErasable = false
+  for (const col of columns) {
+    for (const cell of col) {
+      if (cell.type === type) {
+        cell.erasable = true
+        existErasable = true
+      }
+    }
+  }
+  return existErasable
 }
 
 GameBoard.prototype.destroy = function () {
@@ -77,9 +98,9 @@ GameBoard.prototype.setPoints = function () {
   this.points += blocksAmount * (this.level + 1)
 }
 
-GameBoard.prototype.saveBlocks = function () {
+GameBoard.prototype.saveBlocks = function (special = null) {
   const self = this
-  let needToDelete = self.prepareDeletions()
+  const needToDelete = special ? self.prepareSpecialDeletions(special) : self.prepareDeletions()
   clearInterval(this.timerId)
   self.board.drawBoard()
 
