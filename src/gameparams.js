@@ -5,6 +5,7 @@ export const GAME_PARAMS = {
   numberOfRows: 20,
   acceleration: 20,
   colors: {
+    0: 'special',
     1: 'red',
     2: 'green',
     3: 'blue',

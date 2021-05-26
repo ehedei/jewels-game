@@ -39,6 +39,7 @@ Board.prototype.drawBoard = function () {
       block?.classList.add(GAME_PARAMS.colors[this.columns[i][j].type])
     })
   })
+  this.setSpecialToErasable()
 }
 
 Board.prototype.clearBoard = function () {
@@ -64,4 +65,15 @@ Board.prototype.countErasableBlocks = function () {
     })
   })
   return amount
+}
+
+Board.prototype.setSpecialToErasable = function () {
+  this.columns.forEach((col, i) => {
+    col.forEach((block, j) => {
+      if (block.erasable) {
+        const cell = this.element.querySelector(`.row${j} .col${i}`)
+        cell?.classList.add('special')
+      }
+    })
+  })
 }

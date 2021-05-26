@@ -27,12 +27,13 @@ GameBoard.prototype.run = function (newSpeed = this.speed) {
         block.x = self.board.column.x
         j++
       }
-        GAME_PARAMS.audios.fall.play()
+      GAME_PARAMS.audios.fall.play()
 
       if (self.board.columns[self.board.column.x].length >= GAME_PARAMS.numberOfRows) {
         clearInterval(self.timerId)
         GAME_PARAMS.audios.main.pause()
         GAME_PARAMS.audios.gameover.play()
+        // GAME OVER ******************************************************************************
       } else {
         self.board.column = self.board.nextColumn
         self.board.nextColumn = new Column(self.board)
@@ -80,6 +81,7 @@ GameBoard.prototype.saveBlocks = function () {
   const self = this
   let needToDelete = self.prepareDeletions()
   clearInterval(this.timerId)
+  self.board.drawBoard()
 
   setTimeout(() => {
     if (needToDelete) {
@@ -91,7 +93,7 @@ GameBoard.prototype.saveBlocks = function () {
     } else {
       self.run()
     }
-  }, GAME_PARAMS.initialSpeed * 1.7)
+  }, GAME_PARAMS.initialSpeed * 1.5)
 }
 
 GameBoard.prototype.prepareDeletions = function () {
@@ -113,14 +115,14 @@ GameBoard.prototype.prepareDeletions = function () {
   }
 
   // Horizontal
-  for (let x = 1; x < columns.length - 1; x++) {
+  for (let x = 0; x < columns.length - 2; x++) {
     for (let y = 0; y < columns[x].length; y++) {
-      if (!columns[x][y] || !columns[x + 1][y] || !columns[x - 1][y]) {
+      if (!columns[x][y] || !columns[x + 1][y] || !columns[x + 2][y]) {
         break
-      } else if (columns[x][y].type === columns[x + 1][y].type && columns[x - 1][y].type === columns[x][y].type) {
+      } else if (columns[x][y].type === columns[x + 1][y].type && columns[x + 2][y].type === columns[x][y].type) {
         columns[x][y].erasable = true
         columns[x + 1][y].erasable = true
-        columns[x - 1][y].erasable = true
+        columns[x + 2][y].erasable = true
         needToDelete = true
       }
     }

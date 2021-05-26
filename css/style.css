@@ -7,7 +7,7 @@ body {
   justify-content: center;
   font-family: 'Press Start 2P', cursive;
   -webkit-text-stroke: 0.5px white;
-  
+
 }
 
 main {
@@ -17,7 +17,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
-  
+
 
 }
 
@@ -160,6 +160,50 @@ table {
 
 .black {
   background-image: url('./../assets/img/black.png');
+}
+
+@keyframes special-piece {
+  0% {
+    background-image: url('./../assets/img/silver.png');
+  }
+
+  12% {
+    background-image: url('./../assets/img/red.png');
+  }
+
+  25% {
+    background-image: url('./../assets/img/green.png');
+  }
+
+  37% {
+    background-image: url('./../assets/img/pink.png');
+  }
+
+  50% {
+    background-image: url('./../assets/img/black.png');
+  }
+
+  62% {
+    background-image: url('./../assets/img/yellow.png');
+  }
+
+  75% {
+    background-image: url('./../assets/img/blue.png');
+  }
+
+  87% {
+    background-image: url('./../assets/img/orange.png');
+  }
+
+  100% {
+    background-image: url('./../assets/img/silver.png');
+  }
+}
+
+.special {
+  animation-name: special-piece;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
 }
 
 #btn-start {
