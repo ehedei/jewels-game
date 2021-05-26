@@ -247,7 +247,7 @@ button {
   min-width: 180px;
   padding: 18px;
   background-color: transparent;
-  background-image: url('./../assets/img/PikPng.com_restart-png_5132823.png');
+  background-image: url('./../assets/img/btn-bg-w.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border: none;
@@ -268,11 +268,6 @@ button {
 
 .gameover-cnt h2 {
   font-size: 50px;
-}
-
-.gameover-cnt button {
-  margin-top: 40px;
-  padding: 2rem 3.8rem;
 }
 
 .score-cnt h4 {
@@ -314,5 +309,52 @@ button {
 .level-up {
   animation: level-up;
   animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.modal button {
+  background-image: url("./../assets/img/btn-bg.png");
+  margin-top: 40px;
+  padding: 2rem 3.8rem;
+}
+
+
+.controllers-wrapper header {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.controllers-wrapper header img {
+  width: 60%;
+
+}
+
+.controllers-wrapper header h1 {
+  font-size: 35px;
+  text-shadow: 0px 5px 4px brown;
+}
+
+.modal-cnt h1 {
+  text-shadow: 0px 5px 4px brown;
+  font-size: 50px;
+  margin-bottom: 60px;
+}
+
+
+@keyframes insert-coin {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+
+
+#insert-coin {
+  margin-top: 50px;
+  animation: insert-coin;
+  animation-duration: .5s;
   animation-iteration-count: infinite;
 }
