@@ -1,7 +1,7 @@
 export const GAME_PARAMS = {
   initialSpeed: 250,
   initialXPosition: 4,
-  frequencyOfSpecial: 50,
+  frequencyOfSpecial: 7,
   numberOfColumns: 9,
   numberOfRows: 20,
   acceleration: 12,
@@ -17,12 +17,12 @@ export const GAME_PARAMS = {
     7: 'pink'
   },
   audios: {
-    fall: new Audio('./../assets/audio/fall.wav'),
-    gameover: new Audio('./../assets/audio/gameover.wav'),
-    line: new Audio('./../assets/audio/line.wav'),
-    success: new Audio('./../assets/audio/success.wav'),
-    clear: new Audio('./../assets/audio/clear.wav'),
-    selection: new Audio('./../assets/audio/selection.wav'),
-    main: new Audio('./../assets/audio/clear-skies.mp3')
+    fall: document.getElementById('fall-sound'),
+    gameover: document.getElementById('gameover-sound'),
+    line: document.getElementById('line-sound'),
+    success: document.getElementById('success-sound'),
+    clear: document.getElementById('clear-sound'),
+    selection: document.getElementById('selection-sound'),
+    main: document.getElementById('main-sound')
   }
 }

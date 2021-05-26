@@ -81,6 +81,7 @@ GameBoard.prototype.destroy = function () {
 GameBoard.prototype.pause = function () {
   clearInterval(this.timerId)
   this.timerId = false
+  this.board.clearBoard()
 }
 
 GameBoard.prototype.nextLevel = function () {
