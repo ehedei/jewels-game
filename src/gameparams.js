@@ -4,7 +4,7 @@ export const GAME_PARAMS = {
   frequencyOfSpecial: 7,
   numberOfColumns: 9,
   numberOfRows: 20,
-  acceleration: 12,
+  acceleration: 10,
   nextLevel: 15,
   colors: {
     0: 'special',
