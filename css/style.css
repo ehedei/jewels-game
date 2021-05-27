@@ -280,7 +280,7 @@ button {
   font-size: 20px;
 }
 
-#level-up {
+.player-alert {
   position: absolute;
   opacity: 0;
 }
