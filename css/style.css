@@ -48,6 +48,12 @@ display: flex;
   position: relative;
 }
 
+
+.board-wrapper h5 {
+  margin-bottom: 1rem;
+}
+
+
 table {
   border-spacing: 0;
 }
@@ -60,7 +66,7 @@ table {
   background-size: cover;
 }
 
-#player1-board {
+#player1-board, #player2-board {
   background-color: rgba(0, 0, 0, 0.8);
   border: 2px solid brown;
   box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.39);
@@ -103,10 +109,18 @@ table {
 
 .controllers {
   display: flex;
-  height: 20%;
+  height: 30%;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+}
+
+.controllers button {
+  margin-top: .5rem;
+}
+
+#btn-back {
+  filter: saturate(0.2);
 }
 
 .game-info-wrapper {
@@ -227,11 +241,6 @@ table {
 
 #gameover-screen {
   display: none;
-
-}
-
-#start-screen {
-
 }
 
 .modal-cnt {
@@ -283,6 +292,13 @@ button {
 .player-alert {
   position: absolute;
   opacity: 0;
+}
+
+.gameover-alert {
+  position: absolute;
+  opacity: 0;
+  top: 35%;
+  transition: .5s ease;
 }
 
 
@@ -357,4 +373,68 @@ button {
   animation: insert-coin;
   animation-duration: .5s;
   animation-iteration-count: infinite;
+}
+
+#player2-zone {
+  display: none;
+}
+
+#start-screen .modal-cnt > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#start-screen .modal-cnt > div > div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#start-screen .modal-cnt > div > div button {
+  margin: 1rem;
+}
+
+#results-screen {
+  display: none;
+}
+
+#insert-coin {
+  text-align: center;
+}
+
+.btn-2-players-cnt {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.controllers-btns-cnt {
+  display: flex;
+  flex-direction: row;
+}
+
+#player2-btn-cnt {
+  display: none;
+}
+
+#player2-btn-cnt button {
+  filter: invert(1) grayscale(0.4);
+}
+
+#winner {
+  color: white;
+  text-shadow: 0px 5px 4px brown;
+}
+
+#results-screen h3 {
+  color: darkgoldenrod;
+}
+
+#results-screen .score-cnt {
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

@@ -12,10 +12,12 @@ export function GameBoard (playerName, player, game) {
   this.board = new Board(playerName, this)
   this.wrapper = document.getElementById(playerName + '-zone')
   this.game = game
+  this.isStarted = false
 }
 
 GameBoard.prototype.run = function (newSpeed = this.speed) {
   const self = this
+  this.isStarted = true
   self.timerId = setInterval(function () {
     let special = null
     // If the piece is beyond the end of the column, the piece will go down
@@ -73,10 +75,9 @@ GameBoard.prototype.resolveCollision = function (special) {
 GameBoard.prototype.setGameOver = function () {
   clearInterval(this.timerId)
   this.timerId = false
-  GAME_PARAMS.audios.main.pause()
-  GAME_PARAMS.audios.gameover.play()
-  document.getElementById('final-score').innerText = this.points
-  document.getElementById('gameover-screen').style.display = 'flex'
+  this.game.setGameOver()
+  this.wrapper.querySelector('.gameover-alert').style.opacity = 1
+  this.started = false
 }
 
 GameBoard.prototype.prepareSpecialDeletions = function (type) {
@@ -103,6 +104,7 @@ GameBoard.prototype.pause = function () {
   clearInterval(this.timerId)
   this.timerId = false
   this.board.clearBoard()
+  this.isStarted = false
 }
 
 GameBoard.prototype.nextLevel = function () {

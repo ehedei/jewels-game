@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,13 +14,20 @@
 </head>
 
 <body>
-  <audio id="fall-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/fall.wav" crossorigin="anonymous"></audio>
-  <audio id="gameover-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/gameover.wav" crossorigin="anonymous"></audio>
-  <audio id="line-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/line.wav" crossorigin="anonymous"></audio>
-  <audio id="success-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/success.wav" crossorigin="anonymous"></audio>
-  <audio id="clear-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/clear.wav" crossorigin="anonymous"></audio>
-  <audio id="selection-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/selection.wav" crossorigin="anonymous"></audio>
-  <audio id="main-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/clear-skies.mp3" crossorigin="anonymous"></audio>
+  <audio id="fall-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/fall.wav"
+    crossorigin="anonymous"></audio>
+  <audio id="gameover-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/gameover.wav"
+    crossorigin="anonymous"></audio>
+  <audio id="line-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/line.wav"
+    crossorigin="anonymous"></audio>
+  <audio id="success-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/success.wav"
+    crossorigin="anonymous"></audio>
+  <audio id="clear-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/clear.wav"
+    crossorigin="anonymous"></audio>
+  <audio id="selection-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/selection.wav"
+    crossorigin="anonymous"></audio>
+  <audio id="main-sound" src="https://raw.githubusercontent.com/ehedei/jewels-game/main/assets/audio/clear-skies.mp3"
+    crossorigin="anonymous"></audio>
 
   <main>
     <section class="game-zone" id="player1-zone">
@@ -51,6 +59,7 @@
         </div>
       </div>
       <div class="board-wrapper">
+        <h5>Player 1</h5>
         <table id="player1-board">
           <tr class="row19">
             <td class="col0 cell"></td>
@@ -293,6 +302,7 @@
           </tr>
         </table>
         <h3 class="player-alert">Level up!</h3>
+        <h3 class="gameover-alert">GAME OVER</h3>
       </div>
     </section>
     <section class="controllers-wrapper">
@@ -301,12 +311,295 @@
         <h1>Jewels</h1>
       </header>
       <div class="controllers">
-        <button id="btn-start" type="button">Start
-        </button>
-        <button id="btn-reset" type="button">Reset</button>
+        <div class="controllers-btns-cnt">
+          <div class="btn-2-players-cnt">
+            <button id="btn-start" type="button">Start</button>
+            <button id="btn-reset" type="button">Reset</button>
+          </div>
+          <div id="player2-btn-cnt" class="btn-2-players-cnt">
+            <button id="btn-start-2" type="button">Start</button>
+            <button id="btn-reset-2" type="button">Reset</button>
+          </div>
+        </div>
+        <button id="btn-back" type="button">Back</button>
       </div>
       <div>
         <img src="./assets/img/dwarf.png" alt="Dwarf">
+      </div>
+    </section>
+    <section class="game-zone" id="player2-zone">
+      <div class="board-wrapper">
+        <h5>Player 2</h5>
+        <table id="player2-board">
+          <tr class="row19">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row18">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row17">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row16">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row15">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row14">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row13">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row12">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row11">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row10">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row9">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row8">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row7">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row6">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row5">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row4">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row3">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row2">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row1">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+
+          </tr>
+          <tr class="row0">
+            <td class="col0 cell"></td>
+            <td class="col1 cell"></td>
+            <td class="col2 cell"></td>
+            <td class="col3 cell"></td>
+            <td class="col4 cell"></td>
+            <td class="col5 cell"></td>
+            <td class="col6 cell"></td>
+            <td class="col7 cell"></td>
+            <td class="col8 cell"></td>
+          </tr>
+        </table>
+        <h3 class="player-alert">Level up!</h3>
+        <h3 class="gameover-alert">GAME OVER</h3>
+      </div>
+      <div class="game-info-wrapper">
+        <div class="next-piece">
+          <table class="next-piece-cnt">
+            <tr>
+              <td class="cell"></td>
+            </tr>
+            <tr>
+              <td class="cell"></td>
+            </tr>
+            <tr>
+              <td class="cell"></td>
+            </tr>
+          </table>
+        </div>
+        <div class="level">
+          <h4>Level</h4>
+          <span></span>
+        </div>
+        <div class="points">
+          <h4>Points</h4>
+          <span></span>
+        </div>
+        <div class="blocks">
+          <h4>Jewels</h4>
+          <span></span>
+        </div>
       </div>
     </section>
   </main>
@@ -315,8 +608,15 @@
       <h1>
         Jewels
       </h1>
-      <button id="startgame-btn">Start</button>
       <p id="insert-coin">INSERT COIN</p>
+      <div>
+        <button id="startgame-btn">1 Player</button>
+        <div>
+          <!--<button id="two-players-btn">2 Players</button>-->
+          <button id="one-v-one-btn"> 1 vs 1 </button>
+        </div>
+
+      </div>
     </div>
   </div>
   <div id="gameover-screen" class="modal">
@@ -331,5 +631,25 @@
       </div>
     </div>
   </div>
+  <div id="results-screen" class="modal">
+    <div class="modal-cnt">
+      <div class="score-cnt">
+        <div>
+          <h4>PLAYER 1</h4>
+          <p id="final-score-player-1">0</p>
+        </div>
+        <div>
+          <h4>PLAYER 2</h4>
+          <p id="final-score-player-2">0</p>
+        </div>
+      </div>
+      <div class="gameover-cnt">
+        <h2 id="winner"></h2>
+        <h3>WINNER</h3>
+        <button id="results-btn">Play Again</button>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
