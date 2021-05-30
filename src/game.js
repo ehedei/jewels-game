@@ -84,6 +84,7 @@ Game.prototype.run = function () {
   this.player1GameBoard.run()
   this.player2GameBoard?.run()
   GAME_PARAMS.audios.main.play()
+  GAME_PARAMS.audios.main.loop = true
 }
 
 
