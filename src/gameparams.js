@@ -1,11 +1,11 @@
 export const GAME_PARAMS = {
   initialSpeed: 250,
   initialXPosition: 4,
-  frequencyOfSpecial: 7,
+  frequencyOfSpecial: 50,
   numberOfColumns: 9,
   numberOfRows: 20,
-  acceleration: 10,
-  nextLevel: 15,
+  acceleration: 8,
+  nextLevel: 100,
   colors: {
     0: 'special',
     1: 'red',
